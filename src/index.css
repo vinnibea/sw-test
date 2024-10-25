@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  h1 {
+    font-family: "Anton", sans-serif;
+    text-transform: uppercase;
+  }
+}
+
+@layer components {
+  /**common**/
+  .social-icon {
+    @apply text-slate-400 hover:text-amber-300 w-6 h-6 transition-colors duration-500 cursor-pointer;
+  }
+  .page-title {
+    @apply overflow-hidden text-5xl font-medium px-4 flex justify-center tracking-wider transition-all duration-500 cursor-pointer pointer-events-none max-xl:text-3xl;
+  }
+  .main {
+    @apply flex flex-col gap-12 px-2  min-h-full;
+  }
+  .description-wrapper {
+    @apply flex w-full flex-col mt-4 border-t-4 border-amber-300;
+  }
+  /** character title **/
+  .character-title {
+    @apply text-slate-900 my-2 flex justify-between bg-white  p-2 uppercase font-extrabold text-3xl border-l-8 border-amber-300;
+  }
+  /** buttons start */
+  .btn-primary {
+    @apply bg-blue-600 text-white/75 uppercase font-bold px-4 py-2 hover:text-white hover:bg-blue-700 transition-all;
+  }
+
+  .btn-secondary {
+    @apply bg-orange-500 text-white/75 uppercase font-bold px-4  py-2 hover:text-white hover:bg-orange-700 transition-all;
+  }
+
+  .btn-expand {
+    @apply w-2/3 gap-2 max-sm:w-full transition-colors max-xl:hidden uppercase font-bold text-center duration-500 px-2 rounded-xl flex justify-end items-center shadow-lg  cursor-pointer;
+  }
+  /** buttons end */
+
+  /** article start **/
+  .article {
+    @apply w-full flex flex-col items-stretch justify-between gap-8 backdrop-blur-md max-xl:min-h-dvh rounded-xl p-2 max-xl:flex-col  max-xl:px-0 max-xl:py-0 max-xl:gap-4 transition-all duration-700;
+  }
+  .article-wrapper--outer {
+    @apply shadow-md rounded-xl transition-all duration-1000 p-2 max-xl:px-2 max-xl:py-4 max-sm:px-0 flex flex-col gap-4;
+  }
+
+  .article-wrapper--inner {
+    @apply h-[720px] p-2 rounded-md backdrop-blur-3xl bg-white/50 border border-white/20 shadow-lg;
+  }
+
+  .film-wrapper {
+    @apply article-wrapper--inner max-xl:h-[320px];
+  }
+  .info-list {
+    @apply font-bold uppercase transition-all flex flex-col gap-2 pb-4 max-md:px-0 duration-500 rounded-md  text-neutral-800 mt-2;
+  }
+
+  .info-list_item {
+    @apply flex justify-between items-center gap-4 text-xs border-b border-b-neutral-500/20 py-2;
+  }
+  .character-legend {
+    @apply first-letter:font-bold first-letter:text-xl first-letter:p-4 
+    border-4 border-blue-600/20 italic p-2 w-full text-[16px] text-neutral-950 relative min-h-[160px] h-full
+    flex items-center justify-center rounded-md bg-white/20  mt-6 transition-all duration-500 delay-500;
+  }
+
+  .main-image {
+    @apply border-4 border-neutral-200 w-1/3 aspect-square object-cover transition-all duration-700 rounded-md bg-slate-600 shadow-lg shadow-slate-600;
+  }
+
+  /** article end **/
+  .film {
+    @apply transition-all max-h-[720px] duration-300 delay-300 min-h-full max-xl:rounded-md relative overflow-hidden max-xl:flex-grow-[5];
+  }
+  .film-cover {
+    @apply w-full h-full absolute object-cover transition-all duration-1000 max-xl:blur-none;
+  }
+  .film-episode {
+    @apply absolute left-0 opacity-0 max-xl:opacity-100 right-0 text-white font-bold text-xl uppercase transition-all duration-700 ease-in z-10 text-center delay-0;
+  }
+  .film-title {
+    @apply -skew-x-[360deg] relative text-center flex justify-center items-center h-full max-xl:min-h-[320px] p-2 z-10 font-bold text-base max-xl:bg-amber-300 uppercase top-0 bottom-0 max-xl:text-xs [writing-mode:vertical-rl] transition-colors cursor-pointer;
+  }
+  .film-details {
+    @apply absolute flex max-xl:opacity-100 max-xl:bg-gradient-to-r max-xl:from-transparent max-xl:to-amber-300 justify-end gap-4 left-0 right-0 bottom-0 max-xl:max-h-[320px] text-white font-bold text-[12px] uppercase transition-all delay-300 duration-1000 text-right px-2;
+  }
+}
+
+/** animations start **/
+.loader {
+  animation: spin 2s infinite ease-in-out;
+}
+
+.pulse {
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+/** animations end **/
