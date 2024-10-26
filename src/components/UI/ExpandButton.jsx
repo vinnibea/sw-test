@@ -3,11 +3,7 @@ function ExpandButton({ onClick, expanded, children }) {
   return (
     <button
       type="button"
-      className={`btn-expand ${
-        expanded
-          ? "bg-white text-black hover:bg-white hover:text-black"
-          : "bg-neutral-700 text-white hover:bg-neutral-800 "
-      }`}
+      className={`btn-expand bg-neutral-700 text-white hover:bg-neutral-800`}
       onClick={onClick}
     >
       {children}

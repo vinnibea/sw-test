@@ -62,7 +62,7 @@ function ShipsMiniatures({ id, filmTitle, selectedStarship, selectStarship }) {
     <img
       src={image || placeholder_image}
       alt={data?.name}
-      className={`w-12 h-12 rounded-md shadow-xl border-4 cursor-pointer transition-all duration-700 ${
+      className={`w-12 h-12 max-xl:w-10 max-xl:h-10 rounded-md shadow-xl border-4 cursor-pointer transition-all duration-700 ${
         id === selectedStarship ? "border-amber-300" : "border-neutral-300"
       }`}
       onClick={() => selectStarship(id, !!image)}

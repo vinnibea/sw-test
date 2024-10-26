@@ -27,6 +27,14 @@ function getTypeLength(array, type) {
 function getTypeLast(array, type) {
     return array.findLast(el => el.type === type) || [];
 }
+
+function edgeConstructor(start, end) {
+    return {
+        id: `e${start}-${end}`,
+        source: start,
+        target: end,
+    };
+}
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
 const useStore = create((set, get) => ({
     //state
@@ -94,18 +102,15 @@ const useStore = create((set, get) => ({
                 x: last_film?.position?.x + 250 || 0,
             }
         };
-        // //setting new node
+        //setting new node
         const new_nodes_state = [...character_nodes, node_to_set];
         set({
             nodes: { ...all_nodes, [state_id]: new_nodes_state }
         });
-        // //new edge creation
-        // // example { id: 'e1-2', source: '1', target: '2' },
-        const edge_to_create = {
-            id: `e1-${new_node_id}`,
-            source: '1',
-            target: new_node_id,
-        };
+        //new edge creation
+        // example { id: 'e1-2', source: '1', target: '2' },
+        const edge_to_create = edgeConstructor('1', new_node_id);
+        //finding existing egdes for character
         const existing_edges = get().edges[state_id] || [];
         // creating new egde
         set({
@@ -114,7 +119,7 @@ const useStore = create((set, get) => ({
             }
         })
         //updating films
-        if(starshipsLength) {
+        if (starshipsLength) {
             set((state) => ({
                 films: {
                     ...state.films,
@@ -129,7 +134,7 @@ const useStore = create((set, get) => ({
                 }
             }))
         }
-        
+
 
     },
     //starship node adding
@@ -159,19 +164,15 @@ const useStore = create((set, get) => ({
         //creating new node from film to ship
         const all_edges = get().edges;
         const character_edges = get().edges[state_id]
-        const related_film_id = get().films[state_id][relatedFilm].id;
+        const related_film_id = character_films[relatedFilm].id;
         //creating new egde to film
-        const edge_to_create = {
-            id: `e${related_film_id}-${node_to_set.id}`,
-            source: related_film_id,
-            target: node_to_set.id,
-        }
+        const edge_to_create = edgeConstructor(related_film_id, node_to_set.id)
         //connecting to related film
         set({
             edges: { ...all_edges, [state_id]: [...character_edges, edge_to_create] }
         })
         //decrementing amount of related ships each time
-        const new_ships = character_films[relatedFilm].starships - 1; 
+        const new_ships = character_films[relatedFilm].starships - 1;
         //to avoid duplicates when toogling discover/hide buttons
         set((state) => ({
             films: {
@@ -186,7 +187,7 @@ const useStore = create((set, get) => ({
             }
         }))
 
-         //setting position for next created node to have margins between
+        //setting position for next created node to have margins between
         set({
             x: ship_x_position + 250,
         })

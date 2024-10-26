@@ -116,7 +116,7 @@ function MainCard({ character }) {
         </div>
 
         <div
-          className={`w-full max-xl:w-full h-[720px] max-xl:h-[320px] transform transition-all ease-linear delay-100 ${
+          className={`w-full max-xl:w-full h-[480px] max-xl:h-[320px] transform transition-all ease-linear delay-100 border border-white/20 bg-blue-500/20 rounded-md ${
             !(nodes[character.id]?.length > 0)
               ? "flex justify-center items-center"
               : ""
