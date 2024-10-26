@@ -50,7 +50,7 @@ function MainCard({ character }) {
 
   return (
     <div
-      className="min-h-full flex flex-col p-4 rounded-md shadow-xl shadow-blue-300/70"
+      className="min-h-full flex flex-col p-4  max-xl:p-2 rounded-md shadow-xl shadow-blue-300/70"
       style={{
         background: `url(${
           data?.image || episodes[0].src
@@ -59,7 +59,7 @@ function MainCard({ character }) {
     >
       <article className="article">
         <div className="flex w-full items-start gap-4 max-xl:flex-col">
-          <div className="article-wrapper--inner w-1/2 max-xl:w-full gap-2 flex flex-col justify-between">
+          <div className="bg-white px-4 py-2 rounded-md w-1/2 max-xl:w-full gap-2 flex flex-col justify-between">
             <div className="flex items-start gap-2">
               <ProfileImage
                 image={data?.image}
@@ -116,7 +116,7 @@ function MainCard({ character }) {
         </div>
 
         <div
-          className={`article-wrapper--inner w-full max-xl:w-full h-[720px] max-xl:h-[320px] transform transition-all ease-linear delay-100 ${
+          className={`w-full max-xl:w-full h-[720px] max-xl:h-[320px] transform transition-all ease-linear delay-100 ${
             !(nodes[character.id]?.length > 0)
               ? "flex justify-center items-center"
               : ""

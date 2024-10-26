@@ -13,7 +13,7 @@ function App() {
   } = useFetchPeoplePage()
 
   return (
-    <div className={`App min-h-dvh px-4 pb-4 ${status === 'pending' ? 'flex justify-center items-center pulse relative transition-all duration-700 ease-linear -z-10' : 'flex flex-col gap-16'}`}>
+    <div className={`App min-h-dvh px-4 max-xl:px-0 pb-4 ${status === 'pending' ? 'flex justify-center items-center pulse relative transition-all duration-700 ease-linear -z-10' : 'flex flex-col gap-16'}`}>
 
       {status === 'success' ? (
         <>
