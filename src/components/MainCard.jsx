@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo, useCallback, useRef, lazy, Suspense } from "react";
 import { useShallow } from "zustand/react/shallow";
 import useFetchCharaterWithDetails from "../hooks/useFetchCharacterDetails";
 import ProfileInfo from "./ProfileInfo";
@@ -15,7 +15,6 @@ import { placeholder_text } from "../localData/placeholders";
 
 function MainCard({ character }) {
   //expanding film card with onMouseEnter
-  const [expandedFilm, setExpandedFilm] = useState(false);
   const [showAllFilms, setShowAllFilms] = useState(false);
   const { setRootNode, setId, nodes } = useStore(useShallow(selector));
 
@@ -23,15 +22,9 @@ function MainCard({ character }) {
   const { status, data } = useFetchCharaterWithDetails(character.name);
 
   //setting active film card
-  const setActive = (episode) => {
-    if (episode === expandedFilm) return;
-    else {
-      return setExpandedFilm(episode);
-    }
-  };
 
   //setting up store on button click
-  const onStoreSet = () => {
+  const onStoreSet = useCallback(() => {
     setId(character.id);
     //position of each node will be calculated in store
     setRootNode({
@@ -41,13 +34,13 @@ function MainCard({ character }) {
     });
     //show button fires expanding of covers and sets active film to first by default
     setShowAllFilms(true);
-    setActive(character.films[0]);
-  };
+  }, [character.id]);
   //reset store on hid button click
   const onDiscoverHide = () => {
     setShowAllFilms(false);
   };
-
+  const films_length = useRef(character.films.length);
+  const starships = useRef(character.starships);
   return (
     <div
       className="min-h-full flex flex-col p-4  max-xl:p-2 rounded-md shadow-xl shadow-blue-300/70"
@@ -95,21 +88,20 @@ function MainCard({ character }) {
           </div>
 
           <div
-            className={`flex gap-2 max-xl:flex-col w-1/2 max-xl:w-full transform transition-all ease-linear duration-300 ${
+            className={`flex justify-end gap-0 max-xl:flex-col w-1/2 max-xl:w-full transform transition-all ease-linear duration-300 ${
               showAllFilms
                 ? "translate-x-0 opacity-100 pointer-events-auto"
                 : "-translate-x-full opacity-0 max-h-0 pointer-events-none"
             }`}
           >
             {showAllFilms &&
-              character.films.map((episode, _, array) => (
+              character.films.map((episode, i) => (
                 <FilmCard
-                  filmToFetch={episode}
                   key={episode}
-                  expanded={episode === (expandedFilm === 0 ? 1 : expandedFilm)}
-                  setExpandedFilm={setActive}
-                  starships={character.starships}
-                  filmsLength={array.length}
+                  filmToFetch={episode}
+                  starships={starships.current}
+                  filmsLength={films_length.current}
+                  i={i}
                 />
               ))}
           </div>
@@ -137,4 +129,4 @@ function MainCard({ character }) {
   );
 }
 
-export default MainCard;
+export default memo(MainCard);

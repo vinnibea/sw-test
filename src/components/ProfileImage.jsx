@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { placeholder_image } from "../localData/placeholders";
 
 function ProfileImage({ image, status, alt }) {
@@ -12,4 +13,4 @@ function ProfileImage({ image, status, alt }) {
   );
 }
 
-export default ProfileImage;
+export default memo(ProfileImage);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { IoArrowDownCircle } from "react-icons/io5";
 function ExpandButton({ onClick, expanded, children }) {
   return (
@@ -18,4 +19,4 @@ function ExpandButton({ onClick, expanded, children }) {
   );
 }
 
-export default ExpandButton;
+export default memo(ExpandButton);

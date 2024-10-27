@@ -1,5 +1,5 @@
 import ExpandedButton from "./UI/ExpandButton";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { setProfile } from "../utils/helpers";
 
 function ProfileInfo({ profile, shouldHide }) {
@@ -41,4 +41,4 @@ function ProfileInfo({ profile, shouldHide }) {
   );
 }
 
-export default ProfileInfo;
+export default memo(ProfileInfo);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import useStore from "../stores/store";
 import selector from "../stores/selector";
@@ -15,7 +15,7 @@ function ShipsMiniatures({ id, filmTitle, selectedStarship, selectStarship }) {
   //checks image existance
   const [image, setImage] = useState();
   useEffect(() => {
-    if (status === "success" && data) {
+    if (status === "success") {
       //creating a node only if status success
       //also we have to pass film title this time to find it`s position in store
       setStarshipNode(
@@ -27,7 +27,7 @@ function ShipsMiniatures({ id, filmTitle, selectedStarship, selectStarship }) {
         filmTitle
       );
     }
-  }, [status]);
+  }, [status, filmTitle, data?.name]);
 
   useEffect(() => {
     //check if we already had request for this picture
@@ -56,18 +56,22 @@ function ShipsMiniatures({ id, filmTitle, selectedStarship, selectStarship }) {
         sessionStorage.setItem(id, JSON.stringify({ url: false }));
       }
     });
-  }, [id]);
+  }, [filmTitle, id]);
+
+  const onStarshipSelection = () => {
+    selectStarship(id, !!image);
+  };
 
   return (
     <img
       src={image || placeholder_image}
       alt={data?.name}
-      className={`w-12 h-12 max-xl:w-10 max-xl:h-10 rounded-md shadow-xl border-4 cursor-pointer transition-all duration-700 ${
+      className={`w-10 h-10 rounded-md shadow-xl border-4 cursor-pointer transition-all duration-700 ${
         id === selectedStarship ? "border-amber-300" : "border-neutral-300"
       }`}
-      onClick={() => selectStarship(id, !!image)}
+      onClick={onStarshipSelection}
     ></img>
   );
 }
 
-export default ShipsMiniatures;
+export default memo(ShipsMiniatures);
