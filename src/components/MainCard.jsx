@@ -14,14 +14,11 @@ import episodes from "../localData/episodes";
 import { placeholder_text } from "../localData/placeholders";
 
 function MainCard({ character }) {
-  //expanding film card with onMouseEnter
   const [showAllFilms, setShowAllFilms] = useState(false);
   const { setRootNode, setId, nodes } = useStore(useShallow(selector));
 
   //useQuery hook for fetching additional data by name of char
   const { status, data } = useFetchCharaterWithDetails(character.name);
-
-  //setting active film card
 
   //setting up store on button click
   const onStoreSet = useCallback(() => {
@@ -39,6 +36,8 @@ function MainCard({ character }) {
   const onDiscoverHide = () => {
     setShowAllFilms(false);
   };
+
+  //refs are the same between renders
   const films_length = useRef(character.films.length);
   const starships = useRef(character.starships);
   return (

@@ -9,9 +9,8 @@ import ShipsMiniatures from "./ShipsMiniatures";
 import StarshipsWrapper from "./StarshipsWrapper";
 import episodes from "../localData/episodes";
 
-//documentation said that this is fine
 
-function FilmCard({ filmToFetch, starships, filmsLength, i }) {
+function FilmCard({ filmToFetch, starships, filmsLength}) {
   const { setFilmNode, id: characterId } = useStore(useShallow(selector));
   //im doing here some stuff to return modified data, so hook... i don`t know
   // maybe i`ll do some class later for all this logics
@@ -53,7 +52,7 @@ function FilmCard({ filmToFetch, starships, filmsLength, i }) {
     }
   }, [status]);
 
-  //expands film on mouse over event
+  //memo will keep data before something in dependency array changes
 
   const activeTitle = useMemo(
     () => (data && data.title ? data.title : "Loading..."),
